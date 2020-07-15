@@ -6,8 +6,7 @@ namespace CricketSystem
     {
         static void Main(string[] args)
         {
-            var commentryObject = new Commentry();
-            string commentry; int run = 0; int wicket = 0; int over = 0; int ball = 0; string totalOver;
+            var scoreController = new ScoreCardController();
 
         label:
 
@@ -27,107 +26,52 @@ namespace CricketSystem
                 var input = int.Parse(Console.ReadLine());
                 Console.WriteLine("\n");
 
-
+                if (ScoreCard.Wicket == 10)
+                {
+                    throw new Exception($"All Wicket Gone !!! \n {ScoreCard.Run}/{ScoreCard.Wicket} {ScoreCard.Over}.{ScoreCard.Ball} Overs");                    
+                }
                 switch (input)
                 {
                     case 1:
-                        commentry = commentryObject.CommentryLoad(6);
-                        run += 6;
-                        ball++;
-                        if (ball == 6)
-                        {
-                            over++;
-                            ball = 0;
-                        }
-                        totalOver = $"{over}.{ball}";
-                        Console.WriteLine($"Commentry : {commentry} \nRun = {run}\nWicket = {wicket}");
-                        Console.WriteLine($"Total Score : {run}/{wicket} {totalOver} Overs");
+                        scoreController.CalculateScoreCard(6);                                              
                         break;
                     case 2:
-                        commentry = commentryObject.CommentryLoad(4);
-                        run += 4;
-                        ball++;
-                        if (ball == 6)
-                        {
-                            over++;
-                            ball = 0;
-                        }
-                        totalOver = $"{over}.{ball}";
-                        Console.WriteLine($"Commentry : {commentry} \nRun = {run}\nWicket = {wicket}");
-                        Console.WriteLine($"Total Score : {run}/{wicket} {totalOver} Overs");
+                        scoreController.CalculateScoreCard(4);
                         break;
                     case 3:
-                        commentry = commentryObject.CommentryLoad(3);
-                        run += 3;
-                        ball++;
-                        if (ball == 6)
-                        {
-                            over++;
-                            ball = 0;
-                        }
-                        totalOver = $"{over}.{ball}";
-                        Console.WriteLine($"Commentry : {commentry} \nRun = {run}\nWicket = {wicket}");
-                        Console.WriteLine($"Total Score : {run}/{wicket} {totalOver} Overs");
+                        scoreController.CalculateScoreCard(3);
                         break;
                     case 4:
-                        commentry = commentryObject.CommentryLoad(2);
-                        run += 2;
-                        ball++;
-                        if (ball == 6)
-                        {
-                            over++;
-                            ball = 0;
-                        }
-                        totalOver = $"{over}.{ball}";
-                        Console.WriteLine($"Commentry : {commentry} \nRun = {run}\nWicket = {wicket}");
-                        Console.WriteLine($"Total Score : {run}/{wicket} {totalOver} Overs");
+                        scoreController.CalculateScoreCard(2);
                         break;
                     case 5:
-                        commentry = commentryObject.CommentryLoad(1);
-                        run += 1;
-                        ball++;
-                        if (ball == 6)
-                        {
-                            over++;
-                            ball = 0;
-                        }
-                        totalOver = $"{over}.{ball}";
-                        Console.WriteLine($"Commentry : {commentry} \nRun = {run}\nWicket = {wicket}");
-                        Console.WriteLine($"Total Score : {run}/{wicket} {totalOver} Overs");
+                        scoreController.CalculateScoreCard(1);
                         break;
                     case 6:
-                        commentry = commentryObject.CommentryLoad(0);
-                        run += 0;
-                        ball++;
-                        if (ball == 6)
-                        {
-                            over++;
-                            ball = 0;
-                        }
-                        totalOver = $"{over}.{ball}";
-                        Console.WriteLine($"Commentry : {commentry} \nRun = {run}\nWicket = {wicket}");
-                        Console.WriteLine($"Total Score : {run}/{wicket} {totalOver} Overs");
+                        scoreController.CalculateScoreCard(0);
                         break;
                     case 7:
-
+                        scoreController.CalculateScoreCard(0,WicketEnum.CatchOut,ExtrasEnum.NoExtras);
                         break;
                     case 8:
-
+                        Console.Write("How many run Added - ");
+                        var run = Convert.ToInt32(Console.ReadLine());
+                        scoreController.CalculateScoreCard(run, WicketEnum.RunOut, ExtrasEnum.NoExtras);
                         break;
                     case 9:
-
+                        scoreController.CalculateScoreCard(0, WicketEnum.BoldOut, ExtrasEnum.NoExtras);
                         break;
                     case 10:
-
+                        scoreController.CalculateScoreCard(0, WicketEnum.LBW, ExtrasEnum.NoExtras);
                         break;
                     case 11:
-
+                        scoreController.CalculateScoreCard(0, WicketEnum.NotOut, ExtrasEnum.Wide);
                         break;
                     case 12:
-
+                        scoreController.CalculateScoreCard(0, WicketEnum.NotOut, ExtrasEnum.NoBall);
                         break;
                     case 13:
-
+                        scoreController.CalculateScoreCard(0, WicketEnum.Stumping, ExtrasEnum.NoExtras);
                         break;
 
                     default:
